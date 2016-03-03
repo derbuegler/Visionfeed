@@ -35,45 +35,76 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-//adding a comment
-
 public class MainActivity extends Activity {
 
-    //twitteraccount Visionfeed
+    /**
+     * a public variable.
+     * String twitteraccount Visionfeed
+     */
     public static String webpage ="https://twitter.com/contextfeed";
 
-    //URL of the server
+    /**
+     * a public variable.
+     * String URL of the server
+     */
     public static final String SERVER_ADRESS = "http://visionfeed.net23.net";
 
     private CameraDevice mCameraDevice;
     private CameraCaptureSession mCameraCaptureSession;
 
-    //select image button
+    /**
+     * a public variable.
+     * select image button
+     */
     Button button;
 
-    //upload image button
+    /**
+     * a public variable.
+     * upload image button
+     */
     Button button2;
 
-    //twitter button
+    /**
+     * a public variable.
+     * twitter button
+     */
     Button button3;
 
-    //shows the image when selected
+    /**
+     * a public variable.
+     * shows the image when selected
+     */
     ImageView imageView;
 
-    //full path of the image
+    /**
+     * a public variable.
+     * String path of the image
+     */
     String imagePath;
 
-    //path of /Visionfeed
-    File filePath;
-
-    //path of /Pictures
+    /**
+     * a public variable.
+     * File path of /Pictures
+     */
     File path;
 
-    //string path of /Visionfeed
+    /**
+     * a public variable.
+     * File path of /Pictures/Visionfeed
+     */
+    File filePath;
+
+    /**
+     * a public variable.
+     * string path of /Visionfeed
+     */
     String URL = "";
 
-    //runs when the app is started and sets all variables
+
+    /**
+     * runs when the app is started and sets all variables
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +151,10 @@ public class MainActivity extends Activity {
         super.onPause();
     }
 
-    //selects between taking and loading a picture
+    /**
+     * selects between taking and loading a picture
+     *
+     */
     public void selectImage() {
         final CharSequence[] options = { "Take Picture", "Picture from Gallery","Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -139,24 +173,36 @@ public class MainActivity extends Activity {
         builder.show();
     }
 
-    //loads the picture on imageView
+    /**
+     * loads the picture on imageView
+     *
+     */
     public void openPicture() {
         imageView.setImageURI(Uri.fromFile(new File(URL + "/visionfeed.jpg")));
     }
 
-    //opens twitteraccount of Visionfeed
+    /**
+     * opens twitteraccount of Visionfeed
+     *
+     */
     public void openPage() {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(webpage));
         startActivity(browserIntent);
     }
 
-    //saves a picture in filePath
+    /**
+     * saves a picture in filePath
+     *
+     */
     File createImageFile() throws IOException {
         String imageFileName = "visionfeed";
         return new File(filePath, imageFileName + ".jpg");
     }
 
-    //opens camera
+    /**
+     * opens the camera
+     *
+     */
     private void takePhoto() {
         Intent callCameraApplicationIntent = new Intent();
         callCameraApplicationIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -171,7 +217,10 @@ public class MainActivity extends Activity {
         startActivity(callCameraApplicationIntent);
     }
 
-    //executes UploadImage
+    /**
+     * executes UploadImage
+     *
+     */
     private void upload() {
         if (imageView.getDrawable() != null) {
             Bitmap bm = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
@@ -181,12 +230,19 @@ public class MainActivity extends Activity {
         }
     }
 
-    //class to upload a bitmap on SERVER_ADRESS with visionfeed.php
+    /**
+     * class to upload a bitmap on SERVER_ADRESS with visionfeed.php
+     *
+     */
     private class UploadImage extends AsyncTask<Void, Void, Void> {
 
         Bitmap image;
         String name;
 
+        /**
+         * a constructor
+         * creates variables for the php file
+         */
         public UploadImage(Bitmap image, String name) {
             this.image = image;
             this.name = name;
@@ -215,7 +271,10 @@ public class MainActivity extends Activity {
             return null;
         }
 
-        //Shows a message after doInBackground()
+        /**
+         * shows a message after doInBackground()
+         *
+         */
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
