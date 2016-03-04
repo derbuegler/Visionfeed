@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * loads the picture on imageView
+     * loads the picture onto imageView
      *
      */
     public void openPicture() {
@@ -182,7 +182,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * opens twitteraccount of Visionfeed
+     * opens twitteraccount of Visionfeed on the internet
      *
      */
     public void openPage() {
@@ -192,7 +192,7 @@ public class MainActivity extends Activity {
 
     /**
      * saves a picture in filePath
-     *
+     * returns a File
      */
     File createImageFile() throws IOException {
         String imageFileName = "visionfeed";
@@ -231,8 +231,8 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * class to upload a bitmap on SERVER_ADRESS with visionfeed.php
-     *
+     * a class
+     * to upload a bitmap on SERVER_ADRESS with visionfeed.php
      */
     private class UploadImage extends AsyncTask<Void, Void, Void> {
 
@@ -242,6 +242,8 @@ public class MainActivity extends Activity {
         /**
          * a constructor
          * creates variables for the php file
+         * @param image
+         * @param name
          */
         public UploadImage(Bitmap image, String name) {
             this.image = image;
@@ -281,6 +283,10 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
         }
 
+        /**
+         * gets request parameters of the server
+         * returns httpRequestParams
+         */
         private HttpParams getHttpRequestParams() {
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, 1000 * 30);
@@ -289,6 +295,10 @@ public class MainActivity extends Activity {
         }
     }
 
+    /**
+     * closes the camera
+     *
+     */
     private void closeCamera() {
         if(mCameraCaptureSession != null) {
             mCameraCaptureSession.close();
